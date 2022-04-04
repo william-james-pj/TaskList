@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */; };
+		E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */; };
 		E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */; };
 		E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74DF27F73B9C00CEF9C6 /* SceneDelegate.swift */; };
 		E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74E127F73B9C00CEF9C6 /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewController.swift; sourceTree = "<group>"; };
+		E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		E04A74DA27F73B9C00CEF9C6 /* TaskList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E04A74DF27F73B9C00CEF9C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +47,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E049561B27FB19C600EBA7BC /* SeeTask */ = {
+			isa = PBXGroup;
+			children = (
+				E049561C27FB19DF00EBA7BC /* View */,
+			);
+			path = SeeTask;
+			sourceTree = "<group>";
+		};
+		E049561C27FB19DF00EBA7BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E049561F27FB2D2800EBA7BC /* Cell */,
+				E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E049561F27FB2D2800EBA7BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E04A74D127F73B9C00CEF9C6 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +106,7 @@
 		E04A74F127F73C5600CEF9C6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E049561B27FB19C600EBA7BC /* SeeTask */,
 				E04A74F627F7408C00CEF9C6 /* Navigation */,
 				E04A74F227F73C8B00CEF9C6 /* Home */,
 			);
@@ -191,7 +221,9 @@
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
 				E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */,
 				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
+				E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */,
 				E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */,
+				E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */,
 				E04A74F527F73CA600CEF9C6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

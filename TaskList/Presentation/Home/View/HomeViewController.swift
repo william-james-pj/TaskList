@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // MARK: - Constrants
-    let taskResuseIdentifier = "TaskCollectionViewCell"
+    fileprivate let taskResuseIdentifier = "TaskCollectionViewCell"
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -64,7 +64,7 @@ class HomeViewController: UIViewController {
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +121,8 @@ class HomeViewController: UIViewController {
 // MARK: - extension CollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        return
+        let seeTask = SeeTaskViewController()
+        self.navigationController?.pushViewController(seeTask, animated: true)
     }
 }
 
