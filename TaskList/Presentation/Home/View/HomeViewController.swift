@@ -46,6 +46,24 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = .clear
         return collectionView
     }()
+    
+    fileprivate let buttonAdd: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "Text")
+        
+        button.layer.cornerRadius = 25
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    fileprivate let imageViewPlus: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "Plus")
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -74,6 +92,9 @@ class HomeViewController: UIViewController {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(labelTitle)
         stackBase.addArrangedSubview(taskCollectionView)
+        view.addSubview(buttonAdd)
+        
+        buttonAdd.addSubview(imageViewPlus)
     }
     
     fileprivate func buildConstraints() {
@@ -82,6 +103,16 @@ class HomeViewController: UIViewController {
             stackBase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             stackBase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             stackBase.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            buttonAdd.heightAnchor.constraint(equalToConstant: 50),
+            buttonAdd.widthAnchor.constraint(equalToConstant: 50),
+            buttonAdd.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32),
+            buttonAdd.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            
+            imageViewPlus.heightAnchor.constraint(equalToConstant: 25),
+            imageViewPlus.widthAnchor.constraint(equalToConstant: 25),
+            imageViewPlus.centerXAnchor.constraint(equalTo: buttonAdd.centerXAnchor),
+            imageViewPlus.centerYAnchor.constraint(equalTo: buttonAdd.centerYAnchor),
         ])
     }
 
