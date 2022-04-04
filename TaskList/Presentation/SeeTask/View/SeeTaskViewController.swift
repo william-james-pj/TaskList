@@ -21,6 +21,15 @@ class SeeTaskViewController: UIViewController {
         return stack
     }()
     
+    fileprivate let labelDate: UILabel = {
+        let label = UILabel()
+        label.text = "Monday, 8 November"
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = UIColor(named: "Disabled")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     fileprivate let viewStackAux: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,12 +52,6 @@ class SeeTaskViewController: UIViewController {
         label.textColor = UIColor(red: 0.32, green: 0.43, blue: 0.90, alpha: 1.00)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    fileprivate let viewStackProcess: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
     }()
     
     fileprivate let labelTitle: UILabel = {
@@ -125,8 +128,8 @@ class SeeTaskViewController: UIViewController {
         stack.axis = .horizontal
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(labelDate)
         stack.addArrangedSubview(viewProcess)
-        stack.addArrangedSubview(viewStackProcess)
         return stack
     }
     
@@ -139,6 +142,24 @@ class SeeTaskViewController: UIViewController {
         stack.addArrangedSubview(stackProcess())
         return stack
     }
+    
+    fileprivate let buttonAdd: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(named: "Text")
+        
+        button.layer.cornerRadius = 25
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    fileprivate let imageViewPlus: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "Plus")
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -171,6 +192,9 @@ class SeeTaskViewController: UIViewController {
         stackBase.addArrangedSubview(viewStackAux)
         
         viewProcess.addSubview(labelProcess)
+        
+        view.addSubview(buttonAdd)
+        buttonAdd.addSubview(imageViewPlus)
     }
     
     fileprivate func buildConstraints() {
@@ -185,6 +209,16 @@ class SeeTaskViewController: UIViewController {
             
             labelProcess.centerXAnchor.constraint(equalTo: viewProcess.centerXAnchor),
             labelProcess.centerYAnchor.constraint(equalTo: viewProcess.centerYAnchor),
+            
+            buttonAdd.heightAnchor.constraint(equalToConstant: 50),
+            buttonAdd.widthAnchor.constraint(equalToConstant: 50),
+            buttonAdd.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32),
+            buttonAdd.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            
+            imageViewPlus.heightAnchor.constraint(equalToConstant: 25),
+            imageViewPlus.widthAnchor.constraint(equalToConstant: 25),
+            imageViewPlus.centerXAnchor.constraint(equalTo: buttonAdd.centerXAnchor),
+            imageViewPlus.centerYAnchor.constraint(equalTo: buttonAdd.centerYAnchor),
         ])
     }
 }
