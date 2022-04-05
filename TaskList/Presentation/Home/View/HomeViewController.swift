@@ -47,13 +47,15 @@ class HomeViewController: UIViewController {
         return collectionView
     }()
     
-    fileprivate let buttonAdd: UIButton = {
+    fileprivate lazy var buttonAdd: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "Text")
         
         button.layer.cornerRadius = 25
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -69,6 +71,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
+    }
+    
+    // MARK: - Action
+    @IBAction func addButtonTapped() -> Void {
+        let modalVC = ModalAddTaskViewController()
+        modalVC.modalPresentationStyle = .overCurrentContext
+        modalVC.buttonModalFunction = buttonDonePress
+        self.present(modalVC, animated: false, completion: nil)
     }
 
     // MARK: - Setup
@@ -88,6 +98,10 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Methods
+    fileprivate func buttonDonePress() {
+        print("Aeeeee")
+    }
+    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(labelTitle)

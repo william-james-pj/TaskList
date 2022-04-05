@@ -44,13 +44,6 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    fileprivate let imageViewCheck: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "Check")
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
         label.text = "Make text"
@@ -97,7 +90,6 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
         isChecked ? uncheckedButton() : checkedButton()
         isChecked = !isChecked
     }
-
     
     // MARK: - Methods
     fileprivate func checkedButton() {
@@ -116,7 +108,6 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(viewCheck)
         viewCheck.addSubview(buttonCheck)
-//        buttonCheck.addSubview(imageViewCheck)
         
         stackBase.addArrangedSubview(labelTitle)
         
@@ -136,11 +127,6 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
             buttonCheck.widthAnchor.constraint(equalToConstant: 30),
             buttonCheck.centerXAnchor.constraint(equalTo: viewCheck.centerXAnchor),
             buttonCheck.centerYAnchor.constraint(equalTo: viewCheck.centerYAnchor),
-            
-//            imageViewCheck.widthAnchor.constraint(equalToConstant: 14),
-//            imageViewCheck.heightAnchor.constraint(equalToConstant: 10),
-//            imageViewCheck.centerXAnchor.constraint(equalTo: buttonCheck.centerXAnchor),
-//            imageViewCheck.centerYAnchor.constraint(equalTo: buttonCheck.centerYAnchor),
             
             viewImage.widthAnchor.constraint(equalToConstant: 30),
             imageViewArrow.heightAnchor.constraint(equalToConstant: 10),
