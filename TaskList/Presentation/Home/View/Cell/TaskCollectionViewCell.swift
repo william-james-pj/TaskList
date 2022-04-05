@@ -20,7 +20,6 @@ class TaskCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
-        label.text = "College Task"
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +28,6 @@ class TaskCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelDate: UILabel = {
         let label = UILabel()
-        label.text = "Monday, 8 November"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,13 +52,12 @@ class TaskCollectionViewCell: UICollectionViewCell {
         progressView.clipsToBounds = true
         
         progressView.tintColor = UIColor(named: "Text")
-        progressView.setProgress(0.4, animated: true)
+        progressView.setProgress(0, animated: true)
         return progressView
     }()
     
     fileprivate let labelProgress: UILabel = {
         let label = UILabel()
-        label.text = "40%"
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +94,20 @@ class TaskCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Methods
+    func settingCell(task: TaskModel) {
+        self.labelTitle.text = task.title
+        self.labelDate.text = task.dateString
+        setProgressBar(subTasks: task.subTasks)
+    }
+    
+    fileprivate func setProgressBar(subTasks: [SubTaskModel]) {
+        if subTasks.count == 0 {
+            labelProgress.text = "0%"
+            progressBar.setProgress(0, animated: true)
+            return
+        }
+    }
+    
     fileprivate func buildHierarchy() {
         self.addSubview(stackBase)
         stackBase.addArrangedSubview(stackLabel())

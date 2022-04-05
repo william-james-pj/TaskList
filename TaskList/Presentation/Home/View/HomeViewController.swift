@@ -11,6 +11,12 @@ class HomeViewController: UIViewController {
     // MARK: - Constrants
     fileprivate let taskResuseIdentifier = "TaskCollectionViewCell"
     
+    // MARK: - Variables
+    fileprivate var viewModel: HomeViewModel = {
+        return HomeViewModel()
+    }()
+    fileprivate var taskList: [TaskModel] = []
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -85,6 +91,9 @@ class HomeViewController: UIViewController {
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
         
+        viewModel.delegate = self
+        taskList = viewModel.getTask()
+        
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -98,8 +107,8 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Methods
-    fileprivate func buttonDonePress() {
-        print("Aeeeee")
+    fileprivate func buttonDonePress(title: String, description: String) {
+        viewModel.newTask(title, description)
     }
     
     fileprivate func buildHierarchy() {
@@ -132,6 +141,13 @@ class HomeViewController: UIViewController {
 
 }
 
+extension HomeViewController: HomeViewModelDelegate {
+    func reloadCollection() {
+        self.taskList = viewModel.getTask()
+        self.taskCollectionView.reloadData()
+    }
+}
+
 // MARK: - extension CollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -143,11 +159,12 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: - extension CollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return taskList.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: taskResuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: taskResuseIdentifier, for: indexPath) as! TaskCollectionViewCell
+        cell.settingCell(task: taskList[indexPath.row])
         return cell
     }
 }

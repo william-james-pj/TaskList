@@ -9,7 +9,7 @@ import UIKit
 
 class ModalAddTaskViewController: UIViewController {
     // MARK: - Variables
-    var buttonModalFunction: (() -> Void)? = nil
+    var buttonModalFunction: ((_ title: String, _ description: String) -> Void)? = nil
     
     // MARK: - Components
     fileprivate let viewBase: UIView = {
@@ -124,7 +124,7 @@ class ModalAddTaskViewController: UIViewController {
             return
         }
         dismiss(animated: false, completion: nil)
-        buttonModalFunction()
+        buttonModalFunction(textFieldTitle.text ?? "", textFieldDescription.text ?? "")
     }
     
     // MARK: - Methods

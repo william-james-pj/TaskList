@@ -19,6 +19,8 @@
 		E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74F727F7409C00CEF9C6 /* NavigationController.swift */; };
 		E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */; };
 		E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DF827FC80190071C68A /* TextFieldCustom.swift */; };
+		E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFB27FC896F0071C68A /* TaskModel.swift */; };
+		E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */; };
 		E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		E04A74F727F7409C00CEF9C6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddTaskViewController.swift; sourceTree = "<group>"; };
 		E0B26DF827FC80190071C68A /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
+		E0B26DFB27FC896F0071C68A /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +99,7 @@
 		E04A74DC27F73B9C00CEF9C6 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				E0B26DFA27FC89610071C68A /* Model */,
 				E0B26DF727FC7FAE0071C68A /* Common */,
 				E04A74F127F73C5600CEF9C6 /* Presentation */,
 				E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */,
@@ -122,6 +127,7 @@
 		E04A74F227F73C8B00CEF9C6 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E0B26DFD27FC8BBA0071C68A /* ViewModel */,
 				E04A74F327F73C9100CEF9C6 /* View */,
 			);
 			path = Home;
@@ -166,6 +172,22 @@
 				E0B26DF827FC80190071C68A /* TextFieldCustom.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		E0B26DFA27FC89610071C68A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DFB27FC896F0071C68A /* TaskModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E0B26DFD27FC8BBA0071C68A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E0D7BED727F759FC00B31AF3 /* Cell */ = {
@@ -251,8 +273,10 @@
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
 				E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */,
 				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
+				E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */,
 				E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */,
 				E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */,
+				E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */,
 				E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */,
 				E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */,
 				E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */,
