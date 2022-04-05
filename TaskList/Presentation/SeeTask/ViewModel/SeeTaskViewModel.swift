@@ -11,12 +11,19 @@ protocol SeeTaskViewModelDelegate {
     func reloadCollection()
 }
 
+protocol SeeTaskViewModelDelegateSubTask {
+    func updateSubTask(idTask: Int, subTasks: [SubTaskModel])
+}
+
 class SeeTaskViewModel {
     fileprivate var task: TaskModel = TaskModel()
+    fileprivate var idTask: Int = -1
     var delegate: SeeTaskViewModelDelegate?
+    var delegateSubTask: SeeTaskViewModelDelegateSubTask?
     
-    func setTask(task: TaskModel) {
+    func setTask(task: TaskModel, idTask: Int) {
         self.task = task
+        self.idTask = idTask
     }
     
     func getTask() -> TaskModel {
@@ -28,5 +35,13 @@ class SeeTaskViewModel {
         task.subTasks.append(subTask)
         
         delegate?.reloadCollection()
+        delegateSubTask?.updateSubTask(idTask: idTask, subTasks: task.subTasks)
+    }
+    
+    func updateSubTask(idSubTask: Int, subTask: SubTaskModel) {
+        self.task.subTasks[idSubTask] = subTask
+        
+        delegate?.reloadCollection()
+        delegateSubTask?.updateSubTask(idTask: idTask, subTasks: task.subTasks)
     }
 }

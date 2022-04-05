@@ -23,6 +23,7 @@
 		E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */; };
 		E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */; };
 		E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */; };
+		E0B26E0827FCBA060071C68A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */; };
 		E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewModel.swift; sourceTree = "<group>"; };
 		E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddSubTaskViewController.swift; sourceTree = "<group>"; };
+		E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
 		E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				E0B26DF827FC80190071C68A /* TextFieldCustom.swift */,
+				E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */,
 				E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */,
 				E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */,
+				E0B26E0827FCBA060071C68A /* UserDefaults+Extensions.swift in Sources */,
 				E04A74F527F73CA600CEF9C6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

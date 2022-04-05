@@ -15,6 +15,10 @@ class HomeViewModel {
     fileprivate var taskList: [TaskModel] = []
     var delegate: HomeViewModelDelegate?
     
+    init() {
+        getData()
+    }
+    
     func getTask() -> [TaskModel] {
         return taskList
     }
@@ -26,6 +30,22 @@ class HomeViewModel {
         taskList.append(task)
         
         delegate?.reloadCollection()
+        
+        setUserDefault()
+    }
+    
+    func updateSubTask(idTask: Int, subTasks: [SubTaskModel]) {
+        self.taskList[idTask].subTasks = subTasks
+        
+        delegate?.reloadCollection()
+        
+        setUserDefault()
+    }
+    
+    fileprivate func getData() {
+        if getUserDefault() {
+            return
+        }
     }
     
     fileprivate func getDateString() -> String {
@@ -34,5 +54,28 @@ class HomeViewModel {
         dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = "EEEE, d MMMM"
         return dateFormatter.string(from: now)
+    }
+    
+    fileprivate func getUserDefault() -> Bool{
+        let userDefaults = UserDefaults.standard
+        do {
+            let arrayUserDefault = try userDefaults.getObject(forKey: "tasks", castTo: [TaskModel].self)
+            
+            self.taskList = arrayUserDefault
+            
+            return true
+        } catch {
+//            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    fileprivate func setUserDefault() {
+        let userDefaults = UserDefaults.standard
+        do {
+            try userDefaults.setObject(self.taskList, forKey: "tasks")
+        } catch {
+//            print(error.localizedDescription)
+        }
     }
 }

@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol SubTaskCollectionViewCellDelegate {
+    func updateSubTask(subTask: SubTaskModel, idSubTask: Int)
+}
+
 class SubTaskCollectionViewCell: UICollectionViewCell {
     // MARK: - Variables
     var subTask: SubTaskModel = SubTaskModel()
     var subTaskId: Int = -1
+    var delegate: SubTaskCollectionViewCellDelegate?
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -89,6 +94,8 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
     @IBAction func checkButtonTapped() -> Void {
         self.subTask.isComplet = !self.subTask.isComplet
         setChecked()
+        
+        delegate?.updateSubTask(subTask: self.subTask, idSubTask: self.subTaskId)
     }
     
     // MARK: - Methods
@@ -101,7 +108,7 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func setChecked() {
-        self.subTask.isComplet ? uncheckedButton() : checkedButton()
+        self.subTask.isComplet ? checkedButton() : uncheckedButton()
     }
     
     fileprivate func checkedButton() {

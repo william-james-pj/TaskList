@@ -149,11 +149,19 @@ extension HomeViewController: HomeViewModelDelegate {
     }
 }
 
+// MARK: - extension SeeTaskViewModelDelegateSubTask
+extension HomeViewController: SeeTaskViewModelDelegateSubTask {
+    func updateSubTask(idTask: Int, subTasks: [SubTaskModel]) {
+        viewModel.updateSubTask(idTask: idTask, subTasks: subTasks)
+    }
+}
+
 // MARK: - extension CollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let seeTask = SeeTaskViewController()
-        seeTask.viewModel.setTask(task: taskList[indexPath.row])
+        seeTask.viewModel.setTask(task: taskList[indexPath.row], idTask: indexPath.row)
+        seeTask.viewModel.delegateSubTask = self
         self.navigationController?.pushViewController(seeTask, animated: true)
     }
 }

@@ -106,6 +106,17 @@ class TaskCollectionViewCell: UICollectionViewCell {
             progressBar.setProgress(0, animated: true)
             return
         }
+        
+        var numberIsActive = 0
+        subTasks.forEach { item in
+            if item.isComplet  {
+                numberIsActive += 1
+            }
+        }
+        
+        let numberProgress = (numberIsActive * 100) / subTasks.count
+        labelProgress.text = "\(numberProgress)%"
+        progressBar.progress = Float(numberIsActive) / Float(subTasks.count)
     }
     
     fileprivate func buildHierarchy() {

@@ -260,6 +260,13 @@ extension SeeTaskViewController: SeeTaskViewModelDelegate {
     }    
 }
 
+// MARK: - extension SubTaskCollectionViewCellDelegate
+extension SeeTaskViewController: SubTaskCollectionViewCellDelegate {
+    func updateSubTask(subTask: SubTaskModel, idSubTask: Int) {
+        viewModel.updateSubTask(idSubTask: idSubTask, subTask: subTask)
+    }
+}
+
 // MARK: - extension CollectionViewDelegate
 extension SeeTaskViewController: UICollectionViewDelegate {
 }
@@ -273,6 +280,7 @@ extension SeeTaskViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: subTaskResuseIdentifier, for: indexPath) as! SubTaskCollectionViewCell
         cell.settingCell(subTask: task.subTasks[indexPath.row], id: indexPath.row)
+        cell.delegate = self
         return cell
     }
 }
