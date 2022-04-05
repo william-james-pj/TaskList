@@ -21,6 +21,8 @@
 		E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DF827FC80190071C68A /* TextFieldCustom.swift */; };
 		E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFB27FC896F0071C68A /* TaskModel.swift */; };
 		E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */; };
+		E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */; };
+		E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */; };
 		E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		E0B26DF827FC80190071C68A /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		E0B26DFB27FC896F0071C68A /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewModel.swift; sourceTree = "<group>"; };
+		E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddSubTaskViewController.swift; sourceTree = "<group>"; };
 		E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +62,7 @@
 		E049561B27FB19C600EBA7BC /* SeeTask */ = {
 			isa = PBXGroup;
 			children = (
+				E0B26E0027FCA9150071C68A /* ViewModel */,
 				E049561C27FB19DF00EBA7BC /* View */,
 			);
 			path = SeeTask;
@@ -116,6 +121,7 @@
 		E04A74F127F73C5600CEF9C6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				E0B26E0327FCB0170071C68A /* ModalAddSubTask */,
 				E0AC6D0327FC6D1600AC6764 /* ModalAddTask */,
 				E049561B27FB19C600EBA7BC /* SeeTask */,
 				E04A74F627F7408C00CEF9C6 /* Navigation */,
@@ -188,6 +194,30 @@
 				E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0B26E0027FCA9150071C68A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0B26E0327FCB0170071C68A /* ModalAddSubTask */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0427FCB02B0071C68A /* View */,
+			);
+			path = ModalAddSubTask;
+			sourceTree = "<group>";
+		};
+		E0B26E0427FCB02B0071C68A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E0D7BED727F759FC00B31AF3 /* Cell */ = {
@@ -269,11 +299,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */,
 				E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */,
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
 				E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */,
 				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
 				E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */,
+				E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */,
 				E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */,
 				E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */,
 				E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */,

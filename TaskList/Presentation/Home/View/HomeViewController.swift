@@ -141,6 +141,7 @@ class HomeViewController: UIViewController {
 
 }
 
+// MARK: - extension HomeViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
     func reloadCollection() {
         self.taskList = viewModel.getTask()
@@ -152,6 +153,7 @@ extension HomeViewController: HomeViewModelDelegate {
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let seeTask = SeeTaskViewController()
+        seeTask.viewModel.setTask(task: taskList[indexPath.row])
         self.navigationController?.pushViewController(seeTask, animated: true)
     }
 }

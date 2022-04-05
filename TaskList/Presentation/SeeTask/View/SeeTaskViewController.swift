@@ -11,6 +11,12 @@ class SeeTaskViewController: UIViewController {
     // MARK: - Constrants
     fileprivate let subTaskResuseIdentifier = "SubTaskCollectionViewCell"
     
+    // MARK: - Variables
+    var viewModel: SeeTaskViewModel = {
+        return SeeTaskViewModel()
+    }()
+    fileprivate var task: TaskModel = TaskModel()
+    
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -23,7 +29,6 @@ class SeeTaskViewController: UIViewController {
     
     fileprivate let labelDate: UILabel = {
         let label = UILabel()
-        label.text = "Monday, 8 November"
         label.font = .systemFont(ofSize: 16, weight: .regular)
         label.textColor = UIColor(named: "Disabled")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +61,6 @@ class SeeTaskViewController: UIViewController {
     
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
-        label.text = "College task"
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +78,6 @@ class SeeTaskViewController: UIViewController {
     
     fileprivate let labelDescriptionText: UILabel = {
         let label = UILabel()
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas arcu congue orci tempor auctor. Ut imperdiet nisi in est sodales, vel tristique"
         label.font = .systemFont(ofSize: 14, weight: .regular)
         label.numberOfLines = 3
         
@@ -143,13 +146,15 @@ class SeeTaskViewController: UIViewController {
         return stack
     }
     
-    fileprivate let buttonAdd: UIButton = {
+    fileprivate lazy var buttonAdd: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(named: "Text")
         
         button.layer.cornerRadius = 25
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -167,13 +172,27 @@ class SeeTaskViewController: UIViewController {
         setupVC()
     }
     
+    // MARK: - Action
+    @IBAction func addButtonTapped() -> Void {
+        let modalVC = ModalAddSubTaskViewController()
+        modalVC.modalPresentationStyle = .overCurrentContext
+        modalVC.buttonModalFunction = buttonDonePress
+        self.present(modalVC, animated: false, completion: nil)
+    }
+
+    
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
         self.title = "Task Detail"
+        
+        viewModel.delegate = self
+        task = viewModel.getTask()
+        
         buildHierarchy()
         buildConstraints()
         setupCollection()
+        settingData()
     }
     
     fileprivate func setupCollection() {
@@ -184,6 +203,16 @@ class SeeTaskViewController: UIViewController {
     }
 
     // MARK: - Methods
+    fileprivate func buttonDonePress(title: String) {
+        viewModel.newSubTask(title)
+    }
+    
+    fileprivate func settingData() {
+        self.labelTitle.text = task.title
+        self.labelDate.text = task.dateString
+        self.labelDescriptionText.text = task.description
+    }
+    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(stackTitle())
@@ -223,6 +252,14 @@ class SeeTaskViewController: UIViewController {
     }
 }
 
+// MARK: - extension SeeTaskViewModelDelegate
+extension SeeTaskViewController: SeeTaskViewModelDelegate {
+    func reloadCollection() {
+        self.task = viewModel.getTask()
+        self.subTaskCollectionView.reloadData()
+    }    
+}
+
 // MARK: - extension CollectionViewDelegate
 extension SeeTaskViewController: UICollectionViewDelegate {
 }
@@ -230,11 +267,12 @@ extension SeeTaskViewController: UICollectionViewDelegate {
 // MARK: - extension CollectionViewDataSource
 extension SeeTaskViewController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return task.subTasks.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: subTaskResuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: subTaskResuseIdentifier, for: indexPath) as! SubTaskCollectionViewCell
+        cell.settingCell(subTask: task.subTasks[indexPath.row], id: indexPath.row)
         return cell
     }
 }

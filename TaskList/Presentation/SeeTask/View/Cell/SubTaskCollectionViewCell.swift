@@ -9,7 +9,8 @@ import UIKit
 
 class SubTaskCollectionViewCell: UICollectionViewCell {
     // MARK: - Variables
-    var isChecked = false
+    var subTask: SubTaskModel = SubTaskModel()
+    var subTaskId: Int = -1
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -46,7 +47,6 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
-        label.text = "Make text"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -87,11 +87,23 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Action
     @IBAction func checkButtonTapped() -> Void {
-        isChecked ? uncheckedButton() : checkedButton()
-        isChecked = !isChecked
+        self.subTask.isComplet = !self.subTask.isComplet
+        setChecked()
     }
     
     // MARK: - Methods
+    func settingCell(subTask: SubTaskModel, id: Int) {
+        self.subTask = subTask
+        self.subTaskId = id
+        
+        self.labelTitle.text = subTask.title
+        setChecked()
+    }
+    
+    fileprivate func setChecked() {
+        self.subTask.isComplet ? uncheckedButton() : checkedButton()
+    }
+    
     fileprivate func checkedButton() {
         buttonCheck.layer.borderColor = UIColor(named: "Success")?.cgColor
         buttonCheck.backgroundColor = UIColor(named: "Success")

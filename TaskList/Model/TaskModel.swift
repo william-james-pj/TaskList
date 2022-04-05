@@ -13,6 +13,13 @@ class TaskModel: Codable {
     var dateString: String
     var subTasks: [SubTaskModel]
     
+    init(){
+        self.title = ""
+        self.description = ""
+        self.dateString = ""
+        self.subTasks = []
+    }
+    
     init(title: String, description: String, dateString: String, subTasks: [SubTaskModel]){
         self.title = title
         self.description = description
@@ -24,6 +31,11 @@ class TaskModel: Codable {
 class SubTaskModel: Codable {
     var title: String
     var isComplet: Bool
+    
+    init(){
+        self.title = ""
+        self.isComplet = false
+    }
     
     init(title: String, isComplet: Bool){
         self.title = title
