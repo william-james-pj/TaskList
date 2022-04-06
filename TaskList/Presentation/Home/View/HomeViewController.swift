@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 32
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -31,6 +31,24 @@ class HomeViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    fileprivate let labelToday: UILabel = {
+        let label = UILabel()
+        label.text = "Today,"
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = UIColor(named: "Disabled")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    fileprivate let labelDate: UILabel = {
+        let label = UILabel()
+        label.text = "27 March"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = UIColor(named: "Text")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     fileprivate let labelTitle: UILabel = {
@@ -73,6 +91,26 @@ class HomeViewController: UIViewController {
         return image
     }()
     
+    fileprivate func stackHeader() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(labelToday)
+        stack.addArrangedSubview(labelDate)
+        return stack
+    }
+    
+    fileprivate func stackCollection() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 16
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(labelTitle)
+        stack.addArrangedSubview(taskCollectionView)
+        return stack
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +135,7 @@ class HomeViewController: UIViewController {
         buildHierarchy()
         buildConstraints()
         setupCollection()
+        setupNavbar()
     }
     
     fileprivate func setupCollection() {
@@ -113,8 +152,8 @@ class HomeViewController: UIViewController {
     
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
-        stackBase.addArrangedSubview(labelTitle)
-        stackBase.addArrangedSubview(taskCollectionView)
+        stackBase.addArrangedSubview(stackHeader())
+        stackBase.addArrangedSubview(stackCollection())
         view.addSubview(buttonAdd)
         
         buttonAdd.addSubview(imageViewPlus)
@@ -122,7 +161,7 @@ class HomeViewController: UIViewController {
     
     fileprivate func buildConstraints() {
         NSLayoutConstraint.activate([
-            stackBase.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackBase.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             stackBase.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             stackBase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             stackBase.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -137,6 +176,14 @@ class HomeViewController: UIViewController {
             imageViewPlus.centerXAnchor.constraint(equalTo: buttonAdd.centerXAnchor),
             imageViewPlus.centerYAnchor.constraint(equalTo: buttonAdd.centerYAnchor),
         ])
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: nil)
+        self.navigationItem.leftBarButtonItem!.tintColor = UIColor(named: "Text")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "Text")
+           
     }
 
 }

@@ -193,6 +193,7 @@ class SeeTaskViewController: UIViewController {
         buildConstraints()
         setupCollection()
         settingData()
+        setupNavbar()
     }
     
     fileprivate func setupCollection() {
@@ -249,6 +250,10 @@ class SeeTaskViewController: UIViewController {
             imageViewPlus.centerXAnchor.constraint(equalTo: buttonAdd.centerXAnchor),
             imageViewPlus.centerYAnchor.constraint(equalTo: buttonAdd.centerYAnchor),
         ])
+    }
+    
+    fileprivate func setupNavbar() {
+        self.navigationItem.backButtonTitle = ""
     }
 }
 
