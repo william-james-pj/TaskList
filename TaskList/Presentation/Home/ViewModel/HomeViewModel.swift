@@ -12,22 +12,32 @@ protocol HomeViewModelDelegate {
 }
 
 class HomeViewModel {
-    fileprivate var taskList: [TaskModel] = []
+    fileprivate var toDoList: [TaskModel] = []
+    fileprivate var progressList: [TaskModel] = []
     var delegate: HomeViewModelDelegate?
     
     init() {
         getData()
     }
     
-    func getTask() -> [TaskModel] {
-        return taskList
+    func getToDo() -> [TaskModel] {
+        return toDoList
     }
     
-    func newTask(_ title: String, _ description: String) {
+    func getProgress() -> [TaskModel] {
+        return progressList
+    }
+    
+    func newTask(_ title: String, _ description: String, _ status: ETaskStatus) {
         let dateString = getDateString()
         
-        let task = TaskModel(title: title, description: description, dateString: dateString, subTasks: [])
-        taskList.append(task)
+        let task = TaskModel(title: title, description: description, dateString: dateString, status: status, subTasks: [])
+        
+        if task.status == .progress {
+            progressList.append(task)
+        } else {
+            toDoList.append(task)
+        }
         
         delegate?.reloadCollection()
         
@@ -35,11 +45,11 @@ class HomeViewModel {
     }
     
     func updateSubTask(idTask: Int, subTasks: [SubTaskModel]) {
-        self.taskList[idTask].subTasks = subTasks
-        
-        delegate?.reloadCollection()
-        
-        setUserDefault()
+//        self.taskList[idTask].subTasks = subTasks
+//
+//        delegate?.reloadCollection()
+//
+//        setUserDefault()
     }
     
     fileprivate func getData() {
@@ -61,7 +71,13 @@ class HomeViewModel {
         do {
             let arrayUserDefault = try userDefaults.getObject(forKey: "tasks", castTo: [TaskModel].self)
             
-            self.taskList = arrayUserDefault
+            arrayUserDefault.forEach { task in
+                if task.status == .progress {
+                    self.progressList.append(task)
+                    return
+                }
+                self.toDoList.append(task)
+            }
             
             return true
         } catch {
@@ -72,8 +88,9 @@ class HomeViewModel {
     
     fileprivate func setUserDefault() {
         let userDefaults = UserDefaults.standard
+        let all = toDoList + progressList
         do {
-            try userDefaults.setObject(self.taskList, forKey: "tasks")
+            try userDefaults.setObject(all, forKey: "tasks")
         } catch {
 //            print(error.localizedDescription)
         }

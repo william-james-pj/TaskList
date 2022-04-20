@@ -30,14 +30,14 @@ class TextFieldCustom: UITextField {
     
     // MARK: - Setup
     fileprivate func setupTextField() {
-        self.backgroundColor = UIColor(named: "White")
-        self.layer.cornerRadius = 8
-        self.clipsToBounds = true
-        self.font = UIFont(name: "Roboto-Regular", size: 14)
+        self.backgroundColor = .clear
+//        self.layer.cornerRadius = 8
+//        self.clipsToBounds = true
+//        self.font = UIFont(name: "Roboto-Regular", size: 14)
         self.textColor = UIColor(named: "Text")
         
-        setLeftPaddingPoints(16)
-        setRightPaddingPoints(16)
+        setLeftPaddingPoints(0)
+        setRightPaddingPoints(0)
     }
     
     fileprivate func setupConstraint() {

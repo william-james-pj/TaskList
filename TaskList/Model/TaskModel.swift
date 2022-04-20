@@ -7,23 +7,31 @@
 
 import Foundation
 
+enum ETaskStatus: Codable {
+    case toDo
+    case progress
+}
+
 class TaskModel: Codable {
     var title: String
     var description: String
     var dateString: String
+    var status: ETaskStatus
     var subTasks: [SubTaskModel]
     
     init(){
         self.title = ""
         self.description = ""
         self.dateString = ""
+        self.status = .toDo
         self.subTasks = []
     }
     
-    init(title: String, description: String, dateString: String, subTasks: [SubTaskModel]){
+    init(title: String, description: String, dateString: String, status: ETaskStatus, subTasks: [SubTaskModel]){
         self.title = title
         self.description = description
         self.dateString = dateString
+        self.status = status
         self.subTasks = subTasks
     }
 }

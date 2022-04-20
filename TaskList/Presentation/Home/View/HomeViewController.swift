@@ -9,13 +9,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // MARK: - Constrants
-    fileprivate let taskResuseIdentifier = "TaskCollectionViewCell"
+    fileprivate let resuseIdentifierSextionProgress = "TaskCollectionViewCell"
+    fileprivate let resuseIdentifierSectionToDo = "SectionToDoCollectionViewCell"
     
     // MARK: - Variables
     fileprivate var viewModel: HomeViewModel = {
         return HomeViewModel()
     }()
-    fileprivate var taskList: [TaskModel] = []
+    fileprivate var toDoList: [TaskModel] = []
+    fileprivate var progressList: [TaskModel] = []
     
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
@@ -47,15 +49,6 @@ class HomeViewController: UIViewController {
         label.text = "27 March"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = UIColor(named: "Text")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    fileprivate let labelTitle: UILabel = {
-        let label = UILabel()
-        label.text = "My task"
-        label.font = .systemFont(ofSize: 22, weight: .bold)
-        label.textColor = UIColor(red: 0.16, green: 0.16, blue: 0.18, alpha: 1.00)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -104,9 +97,8 @@ class HomeViewController: UIViewController {
     fileprivate func stackCollection() -> UIStackView {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.addArrangedSubview(labelTitle)
         stack.addArrangedSubview(taskCollectionView)
         return stack
     }
@@ -130,7 +122,8 @@ class HomeViewController: UIViewController {
         view.backgroundColor = UIColor(named: "Backgroud")
         
         viewModel.delegate = self
-        taskList = viewModel.getTask()
+        toDoList = viewModel.getToDo()
+        progressList = viewModel.getProgress()
         
         buildHierarchy()
         buildConstraints()
@@ -142,12 +135,13 @@ class HomeViewController: UIViewController {
         taskCollectionView.dataSource = self
         taskCollectionView.delegate = self
         
-        taskCollectionView.register(TaskCollectionViewCell.self, forCellWithReuseIdentifier: taskResuseIdentifier)
+        taskCollectionView.register(SectionToDoCollectionViewCell.self, forCellWithReuseIdentifier: resuseIdentifierSectionToDo)
+        taskCollectionView.register(TaskCollectionViewCell.self, forCellWithReuseIdentifier: resuseIdentifierSextionProgress)
     }
     
     // MARK: - Methods
-    fileprivate func buttonDonePress(title: String, description: String) {
-        viewModel.newTask(title, description)
+    fileprivate func buttonDonePress(title: String, description: String, status: ETaskStatus) {
+        viewModel.newTask(title, description, status)
     }
     
     fileprivate func buildHierarchy() {
@@ -191,7 +185,8 @@ class HomeViewController: UIViewController {
 // MARK: - extension HomeViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
     func reloadCollection() {
-        self.taskList = viewModel.getTask()
+        toDoList = viewModel.getToDo()
+        progressList = viewModel.getProgress()
         self.taskCollectionView.reloadData()
     }
 }
@@ -206,8 +201,12 @@ extension HomeViewController: SeeTaskViewModelDelegateSubTask {
 // MARK: - extension CollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            return
+        }
+        
         let seeTask = SeeTaskViewController()
-        seeTask.viewModel.setTask(task: taskList[indexPath.row], idTask: indexPath.row)
+        seeTask.viewModel.setTask(task: progressList[indexPath.row], idTask: indexPath.row)
         seeTask.viewModel.delegateSubTask = self
         self.navigationController?.pushViewController(seeTask, animated: true)
     }
@@ -215,13 +214,28 @@ extension HomeViewController: UICollectionViewDelegate {
 
 // MARK: - extension CollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
+    // Section
+    public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return taskList.count
+        if section == 0 {
+            return 1
+        }
+        
+        return progressList.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: taskResuseIdentifier, for: indexPath) as! TaskCollectionViewCell
-        cell.settingCell(task: taskList[indexPath.row])
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSectionToDo, for: indexPath) as! SectionToDoCollectionViewCell
+            cell.settingCell(task: toDoList)
+            return cell
+        }
+        	
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSextionProgress, for: indexPath) as! TaskCollectionViewCell
+        cell.settingCell(task: progressList[indexPath.row])
         return cell
     }
 }
@@ -230,6 +244,11 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
+        
+        if indexPath.section == 0 {
+            return CGSize(width: width, height: 238)
+        }
+        
         return CGSize(width: width, height: 110)
     }
 }

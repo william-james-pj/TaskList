@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E01FFE14281038480038A3F3 /* SectionToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */; };
+		E01FFE1628103AD80038A3F3 /* toDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */; };
+		E01FFE18281055590038A3F3 /* ButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE17281055590038A3F3 /* ButtonStatus.swift */; };
 		E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */; };
 		E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */; };
 		E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		E01FFE17281055590038A3F3 /* ButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStatus.swift; sourceTree = "<group>"; };
 		E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewController.swift; sourceTree = "<group>"; };
 		E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		E04A74DA27F73B9C00CEF9C6 /* TaskList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +185,7 @@
 			children = (
 				E0B26DF827FC80190071C68A /* TextFieldCustom.swift */,
 				E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */,
+				E01FFE17281055590038A3F3 /* ButtonStatus.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -227,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */,
+				E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */,
+				E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -302,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01FFE14281038480038A3F3 /* SectionToDoCollectionViewCell.swift in Sources */,
 				E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */,
 				E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */,
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
@@ -309,10 +319,12 @@
 				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
 				E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */,
 				E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */,
+				E01FFE18281055590038A3F3 /* ButtonStatus.swift in Sources */,
 				E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */,
 				E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */,
 				E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */,
 				E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */,
+				E01FFE1628103AD80038A3F3 /* toDoCollectionViewCell.swift in Sources */,
 				E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */,
 				E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */,
 				E0B26E0827FCBA060071C68A /* UserDefaults+Extensions.swift in Sources */,
