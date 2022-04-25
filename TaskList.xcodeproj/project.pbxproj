@@ -7,15 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E01FFE14281038480038A3F3 /* SectionToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */; };
+		E01FFE1628103AD80038A3F3 /* toDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */; };
+		E01FFE18281055590038A3F3 /* ButtonStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01FFE17281055590038A3F3 /* ButtonStatus.swift */; };
+		E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */; };
+		E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */; };
 		E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */; };
 		E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74DF27F73B9C00CEF9C6 /* SceneDelegate.swift */; };
 		E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74E127F73B9C00CEF9C6 /* ViewController.swift */; };
 		E04A74E527F73B9C00CEF9C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04A74E327F73B9C00CEF9C6 /* Main.storyboard */; };
 		E04A74E727F73BAE00CEF9C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04A74E627F73BAE00CEF9C6 /* Assets.xcassets */; };
 		E04A74EA27F73BAE00CEF9C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E04A74E827F73BAE00CEF9C6 /* LaunchScreen.storyboard */; };
+		E04A74F527F73CA600CEF9C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74F427F73CA600CEF9C6 /* HomeViewController.swift */; };
+		E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74F727F7409C00CEF9C6 /* NavigationController.swift */; };
+		E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */; };
+		E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DF827FC80190071C68A /* TextFieldCustom.swift */; };
+		E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFB27FC896F0071C68A /* TaskModel.swift */; };
+		E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */; };
+		E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */; };
+		E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */; };
+		E0B26E0827FCBA060071C68A /* UserDefaults+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */; };
+		E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */; };
+		E0D821BD2816CCDF00D0F54D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = E0D821BC2816CCDF00D0F54D /* RxCocoa */; };
+		E0D821BF2816CCDF00D0F54D /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0D821BE2816CCDF00D0F54D /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionToDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = toDoCollectionViewCell.swift; sourceTree = "<group>"; };
+		E01FFE17281055590038A3F3 /* ButtonStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStatus.swift; sourceTree = "<group>"; };
+		E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewController.swift; sourceTree = "<group>"; };
+		E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		E04A74DA27F73B9C00CEF9C6 /* TaskList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E04A74DF27F73B9C00CEF9C6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +46,16 @@
 		E04A74E627F73BAE00CEF9C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E04A74E927F73BAE00CEF9C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E04A74EB27F73BAE00CEF9C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E04A74F427F73CA600CEF9C6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		E04A74F727F7409C00CEF9C6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddTaskViewController.swift; sourceTree = "<group>"; };
+		E0B26DF827FC80190071C68A /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
+		E0B26DFB27FC896F0071C68A /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeTaskViewModel.swift; sourceTree = "<group>"; };
+		E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddSubTaskViewController.swift; sourceTree = "<group>"; };
+		E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extensions.swift"; sourceTree = "<group>"; };
+		E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,12 +63,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0D821BF2816CCDF00D0F54D /* RxSwift in Frameworks */,
+				E0D821BD2816CCDF00D0F54D /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E049561B27FB19C600EBA7BC /* SeeTask */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0027FCA9150071C68A /* ViewModel */,
+				E049561C27FB19DF00EBA7BC /* View */,
+			);
+			path = SeeTask;
+			sourceTree = "<group>";
+		};
+		E049561C27FB19DF00EBA7BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E049561F27FB2D2800EBA7BC /* Cell */,
+				E049561D27FB19FF00EBA7BC /* SeeTaskViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E049561F27FB2D2800EBA7BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E049562027FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		E04A74D127F73B9C00CEF9C6 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +116,9 @@
 		E04A74DC27F73B9C00CEF9C6 /* TaskList */ = {
 			isa = PBXGroup;
 			children = (
+				E0B26DFA27FC89610071C68A /* Model */,
+				E0B26DF727FC7FAE0071C68A /* Common */,
+				E04A74F127F73C5600CEF9C6 /* Presentation */,
 				E04A74DD27F73B9C00CEF9C6 /* AppDelegate.swift */,
 				E04A74DF27F73B9C00CEF9C6 /* SceneDelegate.swift */,
 				E04A74E127F73B9C00CEF9C6 /* ViewController.swift */,
@@ -65,6 +128,120 @@
 				E04A74EB27F73BAE00CEF9C6 /* Info.plist */,
 			);
 			path = TaskList;
+			sourceTree = "<group>";
+		};
+		E04A74F127F73C5600CEF9C6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0327FCB0170071C68A /* ModalAddSubTask */,
+				E0AC6D0327FC6D1600AC6764 /* ModalAddTask */,
+				E049561B27FB19C600EBA7BC /* SeeTask */,
+				E04A74F627F7408C00CEF9C6 /* Navigation */,
+				E04A74F227F73C8B00CEF9C6 /* Home */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		E04A74F227F73C8B00CEF9C6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DFD27FC8BBA0071C68A /* ViewModel */,
+				E04A74F327F73C9100CEF9C6 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E04A74F327F73C9100CEF9C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0D7BED727F759FC00B31AF3 /* Cell */,
+				E04A74F427F73CA600CEF9C6 /* HomeViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E04A74F627F7408C00CEF9C6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				E04A74F727F7409C00CEF9C6 /* NavigationController.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		E0AC6D0327FC6D1600AC6764 /* ModalAddTask */ = {
+			isa = PBXGroup;
+			children = (
+				E0AC6D0427FC6D2200AC6764 /* View */,
+			);
+			path = ModalAddTask;
+			sourceTree = "<group>";
+		};
+		E0AC6D0427FC6D2200AC6764 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E0B26DF727FC7FAE0071C68A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DF827FC80190071C68A /* TextFieldCustom.swift */,
+				E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */,
+				E01FFE17281055590038A3F3 /* ButtonStatus.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E0B26DFA27FC89610071C68A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DFB27FC896F0071C68A /* TaskModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E0B26DFD27FC8BBA0071C68A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26DFE27FC8BD00071C68A /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0B26E0027FCA9150071C68A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0127FCAB7E0071C68A /* SeeTaskViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0B26E0327FCB0170071C68A /* ModalAddSubTask */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0427FCB02B0071C68A /* View */,
+			);
+			path = ModalAddSubTask;
+			sourceTree = "<group>";
+		};
+		E0B26E0427FCB02B0071C68A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0B26E0527FCB0410071C68A /* ModalAddSubTaskViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E0D7BED727F759FC00B31AF3 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E0D7BED927F75A4600B31AF3 /* TaskCollectionViewCell.swift */,
+				E01FFE13281038480038A3F3 /* SectionToDoCollectionViewCell.swift */,
+				E01FFE1528103AD80038A3F3 /* toDoCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +260,10 @@
 			dependencies = (
 			);
 			name = TaskList;
+			packageProductDependencies = (
+				E0D821BC2816CCDF00D0F54D /* RxCocoa */,
+				E0D821BE2816CCDF00D0F54D /* RxSwift */,
+			);
 			productName = TaskList;
 			productReference = E04A74DA27F73B9C00CEF9C6 /* TaskList.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +292,9 @@
 				Base,
 			);
 			mainGroup = E04A74D127F73B9C00CEF9C6;
+			packageReferences = (
+				E0D821BB2816CCDF00D0F54D /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = E04A74DB27F73B9C00CEF9C6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +322,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E01FFE14281038480038A3F3 /* SectionToDoCollectionViewCell.swift in Sources */,
+				E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */,
 				E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */,
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
+				E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */,
+				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
+				E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */,
+				E0B26E0627FCB0410071C68A /* ModalAddSubTaskViewController.swift in Sources */,
+				E01FFE18281055590038A3F3 /* ButtonStatus.swift in Sources */,
+				E049561E27FB19FF00EBA7BC /* SeeTaskViewController.swift in Sources */,
 				E04A74E027F73B9C00CEF9C6 /* SceneDelegate.swift in Sources */,
+				E0B26DFF27FC8BD00071C68A /* HomeViewModel.swift in Sources */,
+				E049562127FB2D4600EBA7BC /* SubTaskCollectionViewCell.swift in Sources */,
+				E01FFE1628103AD80038A3F3 /* toDoCollectionViewCell.swift in Sources */,
+				E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */,
+				E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */,
+				E0B26E0827FCBA060071C68A /* UserDefaults+Extensions.swift in Sources */,
+				E04A74F527F73CA600CEF9C6 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +491,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -303,7 +503,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,6 +519,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -330,7 +531,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -356,6 +557,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E0D821BB2816CCDF00D0F54D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E0D821BC2816CCDF00D0F54D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0D821BB2816CCDF00D0F54D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		E0D821BE2816CCDF00D0F54D /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0D821BB2816CCDF00D0F54D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E04A74D227F73B9C00CEF9C6 /* Project object */;
 }
