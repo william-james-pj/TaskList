@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import RxSwift
 
 class SectionToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - Constrants
     fileprivate let resuseIdentifierToDo = "ToDoCollectionViewCell"
+    fileprivate let seeTaskSubject = PublishSubject<TaskModel>()
     
     // MARK: - Variables
+    var seeTaskSubjectObservable: Observable<TaskModel> {
+        return seeTaskSubject.asObserver()
+    }
     fileprivate var toDoList: [TaskModel] = []
     
     // MARK: - Components
@@ -114,6 +119,8 @@ class SectionToDoCollectionViewCell: UICollectionViewCell {
 // MARK: - extension CollectionViewDelegate
 extension SectionToDoCollectionViewCell: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Delegate click")
+        seeTaskSubject.onNext(toDoList[indexPath.row])
     }
 }
 

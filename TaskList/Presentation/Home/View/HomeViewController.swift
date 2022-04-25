@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: UIViewController {
     // MARK: - Constrants
     fileprivate let resuseIdentifierSextionProgress = "TaskCollectionViewCell"
     fileprivate let resuseIdentifierSectionToDo = "SectionToDoCollectionViewCell"
+    fileprivate let disposeBag = DisposeBag()
     
     // MARK: - Variables
     fileprivate var viewModel: HomeViewModel = {
@@ -113,7 +115,11 @@ class HomeViewController: UIViewController {
     @IBAction func addButtonTapped() -> Void {
         let modalVC = ModalAddTaskViewController()
         modalVC.modalPresentationStyle = .overCurrentContext
-        modalVC.buttonModalFunction = buttonDonePress
+        
+        modalVC.taskSubjectObservable.subscribe(onNext: { task in
+            self.viewModel.newTask(task)
+        }).disposed(by: disposeBag)
+        
         self.present(modalVC, animated: false, completion: nil)
     }
 
@@ -121,9 +127,24 @@ class HomeViewController: UIViewController {
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
         
-        viewModel.delegate = self
-        toDoList = viewModel.getToDo()
-        progressList = viewModel.getProgress()
+        viewModel.taskBehavior.subscribe(onNext: { tasks in
+            print("Subscribe Home")
+            
+            var toDoAux: [TaskModel] = []
+            var progressAux: [TaskModel] = []
+        
+            tasks.forEach { task in
+                if task.status == .progress {
+                    progressAux.append(task)
+                    return
+                }
+                toDoAux.append(task)
+            }
+            
+            self.toDoList = toDoAux
+            self.progressList = progressAux
+            self.taskCollectionView.reloadData()
+        }).disposed(by: disposeBag)
         
         buildHierarchy()
         buildConstraints()
@@ -140,10 +161,6 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Methods
-    fileprivate func buttonDonePress(title: String, description: String, status: ETaskStatus) {
-        viewModel.newTask(title, description, status)
-    }
-    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(stackHeader())
@@ -177,24 +194,6 @@ class HomeViewController: UIViewController {
         self.navigationItem.leftBarButtonItem!.tintColor = UIColor(named: "Text")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "bell"), style: .plain, target: self, action: nil)
         self.navigationItem.rightBarButtonItem?.tintColor = UIColor(named: "Text")
-           
-    }
-
-}
-
-// MARK: - extension HomeViewModelDelegate
-extension HomeViewController: HomeViewModelDelegate {
-    func reloadCollection() {
-        toDoList = viewModel.getToDo()
-        progressList = viewModel.getProgress()
-        self.taskCollectionView.reloadData()
-    }
-}
-
-// MARK: - extension SeeTaskViewModelDelegateSubTask
-extension HomeViewController: SeeTaskViewModelDelegateSubTask {
-    func updateSubTask(idTask: Int, subTasks: [SubTaskModel]) {
-        viewModel.updateSubTask(idTask: idTask, subTasks: subTasks)
     }
 }
 
@@ -206,8 +205,11 @@ extension HomeViewController: UICollectionViewDelegate {
         }
         
         let seeTask = SeeTaskViewController()
-        seeTask.viewModel.setTask(task: progressList[indexPath.row], idTask: indexPath.row)
-        seeTask.viewModel.delegateSubTask = self
+        seeTask.viewModel.subTaskBehavior.accept(progressList[indexPath.row])
+        seeTask.viewModel.subTaskBehavior.skip(1).subscribe(onNext: { task in
+            print("Subscribe updateTask")
+            self.viewModel.updateTask(task)
+        }).disposed(by: disposeBag)
         self.navigationController?.pushViewController(seeTask, animated: true)
     }
 }
@@ -231,9 +233,24 @@ extension HomeViewController: UICollectionViewDataSource {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSectionToDo, for: indexPath) as! SectionToDoCollectionViewCell
             cell.settingCell(task: toDoList)
+            
+            cell.seeTaskSubjectObservable.subscribe(onNext: { task in
+                print("Subscribe ToDo Click")
+                let seeTask = SeeTaskViewController()
+                
+                seeTask.viewModel.subTaskBehavior.accept(task)
+                
+                seeTask.viewModel.subTaskBehavior.skip(1).subscribe(onNext: { oldTask in
+                    print("Subscribe updateTask ToDo")
+                    self.viewModel.updateTask(oldTask)
+                }).disposed(by: self.disposeBag)
+                
+                self.navigationController?.pushViewController(seeTask, animated: true)
+            }).disposed(by: disposeBag)
+            
             return cell
         }
-        	
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSextionProgress, for: indexPath) as! TaskCollectionViewCell
         cell.settingCell(task: progressList[indexPath.row])
         return cell

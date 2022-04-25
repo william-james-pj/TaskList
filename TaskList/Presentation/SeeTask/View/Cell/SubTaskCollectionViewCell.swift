@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SubTaskCollectionViewCellDelegate {
-    func updateSubTask(subTask: SubTaskModel, idSubTask: Int)
+    func updateSubTask(subTask: SubTaskModel, indexSubTask: Int)
 }
 
 class SubTaskCollectionViewCell: UICollectionViewCell {
@@ -95,7 +95,7 @@ class SubTaskCollectionViewCell: UICollectionViewCell {
         self.subTask.isComplet = !self.subTask.isComplet
         setChecked()
         
-        delegate?.updateSubTask(subTask: self.subTask, idSubTask: self.subTaskId)
+        delegate?.updateSubTask(subTask: self.subTask, indexSubTask: self.subTaskId)
     }
     
     // MARK: - Methods

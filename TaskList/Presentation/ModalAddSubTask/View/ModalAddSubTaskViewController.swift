@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class ModalAddSubTaskViewController: UIViewController {
+    // MARK: - Constants
+    fileprivate let subTaskSubject = PublishSubject<SubTaskModel>()
+    
     // MARK: - Variables
-    var buttonModalFunction: ((_ title: String) -> Void)? = nil
+    var subTaskSubjectObservable: Observable<SubTaskModel> {
+        return subTaskSubject.asObserver()
+    }
     
     // MARK: - Components
     fileprivate let viewBase: UIView = {
@@ -132,11 +138,14 @@ class ModalAddSubTaskViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped() -> Void {
-        guard let buttonModalFunction = buttonModalFunction else {
+        guard let title = textFieldTitle.text else {
             return
         }
+        
+        let newSubtask = SubTaskModel(title: title, isComplet: false)
+        subTaskSubject.onNext(newSubtask)
+        
         dismiss(animated: false, completion: nil)
-        buttonModalFunction(textFieldTitle.text ?? "")
     }
     
     // MARK: - Methods

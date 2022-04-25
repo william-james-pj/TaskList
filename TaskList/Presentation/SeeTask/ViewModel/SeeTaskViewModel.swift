@@ -6,42 +6,26 @@
 //
 
 import Foundation
-
-protocol SeeTaskViewModelDelegate {
-    func reloadCollection()
-}
-
-protocol SeeTaskViewModelDelegateSubTask {
-    func updateSubTask(idTask: Int, subTasks: [SubTaskModel])
-}
+import RxSwift
+import RxRelay
 
 class SeeTaskViewModel {
-    fileprivate var task: TaskModel = TaskModel()
-    fileprivate var idTask: Int = -1
-    var delegate: SeeTaskViewModelDelegate?
-    var delegateSubTask: SeeTaskViewModelDelegateSubTask?
+    var subTaskBehavior: BehaviorRelay<TaskModel> = BehaviorRelay(value: TaskModel())
     
-    func setTask(task: TaskModel, idTask: Int) {
-        self.task = task
-        self.idTask = idTask
+    func newSubTask(_ subTask: SubTaskModel) {
+        let taskAux = subTaskBehavior.value
+        taskAux.subTasks.append(subTask)
+        subTaskBehavior.accept(taskAux)
     }
     
-    func getTask() -> TaskModel {
-        return task
+    func updateSubTask(indexSubTask: Int, subTask: SubTaskModel) {
+        let taskAux = subTaskBehavior.value
+        taskAux.subTasks[indexSubTask] = subTask
     }
     
-    func newSubTask(_ title: String) {
-        let subTask = SubTaskModel(title: title, isComplet: false)
-        task.subTasks.append(subTask)
-        
-        delegate?.reloadCollection()
-        delegateSubTask?.updateSubTask(idTask: idTask, subTasks: task.subTasks)
-    }
-    
-    func updateSubTask(idSubTask: Int, subTask: SubTaskModel) {
-        self.task.subTasks[idSubTask] = subTask
-        
-        delegate?.reloadCollection()
-        delegateSubTask?.updateSubTask(idTask: idTask, subTasks: task.subTasks)
+    func updateStatusTask() {
+        let aux = subTaskBehavior.value
+        aux.status = aux.status == .toDo ? .progress : .toDo
+        subTaskBehavior.accept(aux)
     }
 }

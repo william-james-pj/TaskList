@@ -6,50 +6,39 @@
 //
 
 import Foundation
-
-protocol HomeViewModelDelegate {
-    func reloadCollection()
-}
+import RxSwift
+import RxRelay
 
 class HomeViewModel {
-    fileprivate var toDoList: [TaskModel] = []
-    fileprivate var progressList: [TaskModel] = []
-    var delegate: HomeViewModelDelegate?
+    let disposeBag = DisposeBag()
+    var taskBehavior: BehaviorRelay<[TaskModel]> = BehaviorRelay(value: [])
     
     init() {
         getData()
     }
     
-    func getToDo() -> [TaskModel] {
-        return toDoList
-    }
-    
-    func getProgress() -> [TaskModel] {
-        return progressList
-    }
-    
-    func newTask(_ title: String, _ description: String, _ status: ETaskStatus) {
-        let dateString = getDateString()
-        
-        let task = TaskModel(title: title, description: description, dateString: dateString, status: status, subTasks: [])
-        
-        if task.status == .progress {
-            progressList.append(task)
-        } else {
-            toDoList.append(task)
-        }
-        
-        delegate?.reloadCollection()
+    func newTask(_ task: TaskModel) {
+        var aux = self.taskBehavior.value
+        aux.append(task)
+        self.taskBehavior.accept(aux)
         
         setUserDefault()
     }
     
-    func updateSubTask(idTask: Int, subTasks: [SubTaskModel]) {
-//        self.taskList[idTask].subTasks = subTasks
-//
-//        delegate?.reloadCollection()
-//
-//        setUserDefault()
+    func updateTask(_ task: TaskModel) {
+        var aux = self.taskBehavior.value
+        var indexAux = -1
+        
+        for (index,item) in aux.enumerated() {
+            if item.id == task.id {
+                indexAux = index
+            }
+        }
+        
+        aux[indexAux] = task
+        self.taskBehavior.accept(aux)
+        
+        setUserDefault()
     }
     
     fileprivate func getData() {
@@ -58,26 +47,12 @@ class HomeViewModel {
         }
     }
     
-    fileprivate func getDateString() -> String {
-        let now = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "EEEE, d MMMM"
-        return dateFormatter.string(from: now)
-    }
-    
     fileprivate func getUserDefault() -> Bool{
         let userDefaults = UserDefaults.standard
         do {
             let arrayUserDefault = try userDefaults.getObject(forKey: "tasks", castTo: [TaskModel].self)
-            
-            arrayUserDefault.forEach { task in
-                if task.status == .progress {
-                    self.progressList.append(task)
-                    return
-                }
-                self.toDoList.append(task)
-            }
+
+            self.taskBehavior.accept(arrayUserDefault)
             
             return true
         } catch {
@@ -88,7 +63,7 @@ class HomeViewModel {
     
     fileprivate func setUserDefault() {
         let userDefaults = UserDefaults.standard
-        let all = toDoList + progressList
+        let all = self.taskBehavior.value
         do {
             try userDefaults.setObject(all, forKey: "tasks")
         } catch {

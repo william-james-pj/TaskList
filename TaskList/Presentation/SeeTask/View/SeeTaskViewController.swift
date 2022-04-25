@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class SeeTaskViewController: UIViewController {
     // MARK: - Constrants
     fileprivate let subTaskResuseIdentifier = "SubTaskCollectionViewCell"
+    fileprivate let disposeBag = DisposeBag()
     
     // MARK: - Variables
     var viewModel: SeeTaskViewModel = {
@@ -41,22 +43,18 @@ class SeeTaskViewController: UIViewController {
         return view
     }()
     
-    fileprivate let viewProcess: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.85, green: 0.88, blue: 0.98, alpha: 1.00)
-        view.layer.cornerRadius = 15
-        view.clipsToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    fileprivate let labelProcess: UILabel = {
-        let label = UILabel()
-        label.text = "On Going"
-        label.font = .systemFont(ofSize: 12, weight: .regular)
-        label.textColor = UIColor(red: 0.32, green: 0.43, blue: 0.90, alpha: 1.00)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    fileprivate lazy var buttonProcess: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 0.85, green: 0.88, blue: 0.98, alpha: 1.00)
+        
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+        button.setTitleColor(UIColor(red: 0.32, green: 0.43, blue: 0.90, alpha: 1.00), for: .normal)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(processButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     fileprivate let labelTitle: UILabel = {
@@ -132,7 +130,7 @@ class SeeTaskViewController: UIViewController {
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(labelDate)
-        stack.addArrangedSubview(viewProcess)
+        stack.addArrangedSubview(buttonProcess)
         return stack
     }
     
@@ -176,9 +174,18 @@ class SeeTaskViewController: UIViewController {
     @IBAction func addButtonTapped() -> Void {
         let modalVC = ModalAddSubTaskViewController()
         modalVC.modalPresentationStyle = .overCurrentContext
-        modalVC.buttonModalFunction = buttonDonePress
+        
+        modalVC.subTaskSubjectObservable.subscribe(onNext: { subTask in
+            self.viewModel.newSubTask(subTask)
+        }).disposed(by: disposeBag)
+        
         self.present(modalVC, animated: false, completion: nil)
     }
+    
+    @IBAction func processButtonTapped() -> Void {
+        viewModel.updateStatusTask()
+    }
+
 
     
     // MARK: - Setup
@@ -186,9 +193,15 @@ class SeeTaskViewController: UIViewController {
         view.backgroundColor = UIColor(named: "Backgroud")
         self.title = "Task Detail"
         
-        viewModel.delegate = self
-        task = viewModel.getTask()
-        
+        viewModel.subTaskBehavior.subscribe(onNext: { task in
+            print("Subscribe SeeTask")
+            
+            self.buttonProcess.setTitle(task.status == .toDo ? "To do" : "In process", for: .normal)
+            
+            self.task = task
+            self.subTaskCollectionView.reloadData()
+        }).disposed(by: disposeBag)
+
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -203,11 +216,7 @@ class SeeTaskViewController: UIViewController {
         subTaskCollectionView.register(SubTaskCollectionViewCell.self, forCellWithReuseIdentifier: subTaskResuseIdentifier)
     }
 
-    // MARK: - Methods
-    fileprivate func buttonDonePress(title: String) {
-        viewModel.newSubTask(title)
-    }
-    
+    // MARK: - Methods    
     fileprivate func settingData() {
         self.labelTitle.text = task.title
         self.labelDate.text = task.dateString
@@ -221,8 +230,6 @@ class SeeTaskViewController: UIViewController {
         stackBase.addArrangedSubview(stackSubTask())
         stackBase.addArrangedSubview(viewStackAux)
         
-        viewProcess.addSubview(labelProcess)
-        
         view.addSubview(buttonAdd)
         buttonAdd.addSubview(imageViewPlus)
     }
@@ -234,11 +241,8 @@ class SeeTaskViewController: UIViewController {
             stackBase.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             stackBase.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            viewProcess.heightAnchor.constraint(equalToConstant: 30),
-            viewProcess.widthAnchor.constraint(equalToConstant: 80),
-            
-            labelProcess.centerXAnchor.constraint(equalTo: viewProcess.centerXAnchor),
-            labelProcess.centerYAnchor.constraint(equalTo: viewProcess.centerYAnchor),
+            buttonProcess.heightAnchor.constraint(equalToConstant: 30),
+            buttonProcess.widthAnchor.constraint(equalToConstant: 80),
             
             buttonAdd.heightAnchor.constraint(equalToConstant: 50),
             buttonAdd.widthAnchor.constraint(equalToConstant: 50),
@@ -257,18 +261,10 @@ class SeeTaskViewController: UIViewController {
     }
 }
 
-// MARK: - extension SeeTaskViewModelDelegate
-extension SeeTaskViewController: SeeTaskViewModelDelegate {
-    func reloadCollection() {
-        self.task = viewModel.getTask()
-        self.subTaskCollectionView.reloadData()
-    }    
-}
-
 // MARK: - extension SubTaskCollectionViewCellDelegate
 extension SeeTaskViewController: SubTaskCollectionViewCellDelegate {
-    func updateSubTask(subTask: SubTaskModel, idSubTask: Int) {
-        viewModel.updateSubTask(idSubTask: idSubTask, subTask: subTask)
+    func updateSubTask(subTask: SubTaskModel, indexSubTask: Int) {
+        viewModel.updateSubTask(indexSubTask: indexSubTask, subTask: subTask)
     }
 }
 

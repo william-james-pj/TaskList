@@ -13,6 +13,7 @@ enum ETaskStatus: Codable {
 }
 
 class TaskModel: Codable {
+    var id: String
     var title: String
     var description: String
     var dateString: String
@@ -20,6 +21,7 @@ class TaskModel: Codable {
     var subTasks: [SubTaskModel]
     
     init(){
+        self.id = ""
         self.title = ""
         self.description = ""
         self.dateString = ""
@@ -27,7 +29,8 @@ class TaskModel: Codable {
         self.subTasks = []
     }
     
-    init(title: String, description: String, dateString: String, status: ETaskStatus, subTasks: [SubTaskModel]){
+    init(id: String, title: String, description: String, dateString: String, status: ETaskStatus, subTasks: [SubTaskModel]){
+        self.id = id
         self.title = title
         self.description = description
         self.dateString = dateString

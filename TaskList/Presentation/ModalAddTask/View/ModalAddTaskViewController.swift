@@ -6,10 +6,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class ModalAddTaskViewController: UIViewController {
+    // MARK: - Constants
+    fileprivate let taskSubject = PublishSubject<TaskModel>()
+    
     // MARK: - Variables
-    var buttonModalFunction: ((_ title: String, _ description: String, _ status: ETaskStatus) -> Void)? = nil
+    var taskSubjectObservable: Observable<TaskModel> {
+        return taskSubject.asObserver()
+    }
     var statusValue: ETaskStatus = .toDo
     
     // MARK: - Components
@@ -156,14 +162,25 @@ class ModalAddTaskViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped() -> Void {
-        guard let buttonModalFunction = buttonModalFunction else {
+        guard let title = textFieldTitle.text, let description = textFieldDescription.text else {
             return
         }
+        
+        let dateToday = getDateString()
+        let newTask = TaskModel(id: UUID().uuidString, title: title, description: description, dateString: dateToday, status: self.statusValue, subTasks: [])
+        taskSubject.onNext(newTask)
         dismiss(animated: false, completion: nil)
-        buttonModalFunction(textFieldTitle.text ?? "", textFieldDescription.text ?? "", statusValue)
     }
     
     // MARK: - Methods
+    fileprivate func getDateString() -> String {
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "EEEE, d MMMM"
+        return dateFormatter.string(from: now)
+    }
+    
     fileprivate func buildHierarchy() {
         view.addSubview(viewBase)
         viewBase.addSubview(stackBase)
