@@ -48,7 +48,6 @@ class HomeViewController: UIViewController {
     
     fileprivate let labelDate: UILabel = {
         let label = UILabel()
-        label.text = "27 March"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -146,6 +145,8 @@ class HomeViewController: UIViewController {
             self.taskCollectionView.reloadData()
         }).disposed(by: disposeBag)
         
+        self.labelDate.text = getDateToday()
+        
         buildHierarchy()
         buildConstraints()
         setupCollection()
@@ -161,6 +162,15 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Methods
+    fileprivate func getDateToday() -> String {
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "dd MMMM"
+        return dateFormatter.string(from: now)
+    }
+    
+    
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
         stackBase.addArrangedSubview(stackHeader())
