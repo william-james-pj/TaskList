@@ -30,6 +30,7 @@ O aplicativo permite a criação de tarefas e subtarefas, tendo assim, uma maior
 O projeto foi construído utilizando:
 
 - [Swift](https://www.swift.org/)
+- [RxSwift](https://github.com/ReactiveX/RxSwift)
 
 ## Contato
 
