@@ -1,20 +1,20 @@
 //
-//  ButtonStatus.swift
+//  PriorityButton.swift
 //  TaskList
 //
-//  Created by Pinto Junior, William James on 20/04/22.
+//  Created by Pinto Junior, William James on 29/04/22.
 //
 
 import UIKit
 import RxSwift
 
-class ButtonStatus: UIView {
+class PriorityButton: UIView {
     // MARK: - Constants
-    fileprivate let statusSubject = PublishSubject<ETaskStatus>()
+    fileprivate let prioritySubject = PublishSubject<ETaskPriority>()
     
     // MARK: - Variables
-    var statusSubjectObservable: Observable<ETaskStatus> {
-        return statusSubject.asObserver()
+    var prioritySubjectObservable: Observable<ETaskPriority> {
+        return prioritySubject.asObserver()
     }
     
     // MARK: - Components
@@ -29,7 +29,7 @@ class ButtonStatus: UIView {
     
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
-        label.text = "Status"
+        label.text = "Priority"
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor(named: "Disabled")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +40,7 @@ class ButtonStatus: UIView {
         let button = UIButton()
         button.showsMenuAsPrimaryAction = true
         
-        button.setTitle("To do", for: .normal)
+        button.setTitle("Basic", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         button.contentVerticalAlignment = .bottom
         button.contentHorizontalAlignment = .leading
@@ -49,14 +49,19 @@ class ButtonStatus: UIView {
         return button
     }()
     
-    fileprivate lazy var toDoAction = UIAction(title: "To Do") { _ in
-        self.setButtonTitle(to: "To do")
-        self.statusSubject.onNext(.toDo)
+    fileprivate lazy var basicAction = UIAction(title: "Basic") { _ in
+        self.setButtonTitle(to: "Basic")
+        self.prioritySubject.onNext(.basic)
     }
     
-    fileprivate lazy var progressAction = UIAction(title: "In progress") { _ in
-        self.setButtonTitle(to: "In progress")
-        self.statusSubject.onNext(.progress)
+    fileprivate lazy var importantAction = UIAction(title: "Important") { _ in
+        self.setButtonTitle(to: "Important")
+        self.prioritySubject.onNext(.important)
+    }
+    
+    fileprivate lazy var urgentAction = UIAction(title: "Urgent") { _ in
+        self.setButtonTitle(to: "Urgent")
+        self.prioritySubject.onNext(.urgent)
     }
     
     fileprivate func setButtonTitle(to text: String) {
@@ -81,7 +86,7 @@ class ButtonStatus: UIView {
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        pullDownButton.menu = UIMenu(title: "", children: [toDoAction, progressAction])
+        pullDownButton.menu = UIMenu(title: "", children: [basicAction, importantAction, urgentAction])
         
         buildHierarchy()
         buildConstraints()
@@ -109,3 +114,4 @@ class ButtonStatus: UIView {
         ])
     }
 }
+

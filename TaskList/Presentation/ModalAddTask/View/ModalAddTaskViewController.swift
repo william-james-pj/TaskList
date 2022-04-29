@@ -11,12 +11,14 @@ import RxSwift
 class ModalAddTaskViewController: UIViewController {
     // MARK: - Constants
     fileprivate let taskSubject = PublishSubject<TaskModel>()
+    fileprivate let disposeBag = DisposeBag()
     
     // MARK: - Variables
     var taskSubjectObservable: Observable<TaskModel> {
         return taskSubject.asObserver()
     }
     var statusValue: ETaskStatus = .toDo
+    var priorityValue: ETaskPriority = .basic
     
     // MARK: - Components
     fileprivate let viewBase: UIView = {
@@ -89,22 +91,21 @@ class ModalAddTaskViewController: UIViewController {
         return button
     }()
     
+    fileprivate let buttonPriority: PriorityButton = {
+        let button = PriorityButton()
+        return button
+    }()
+    
     fileprivate func stackButtons() -> UIStackView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 8
-        stack.distribution = .fill
+        stack.distribution = .equalCentering
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(buttonPullDown)
-        stack.addArrangedSubview(viewStackButtonsAux)
+        stack.addArrangedSubview(buttonPriority)
         return stack
     }
-    
-    fileprivate let viewStackButtonsAux: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
     fileprivate lazy var buttonCancel: UIButton = {
         let button = UIButton()
@@ -150,7 +151,13 @@ class ModalAddTaskViewController: UIViewController {
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-        buttonPullDown.delegate = self
+        buttonPullDown.statusSubjectObservable.subscribe(onNext: { status in
+            self.statusValue = status
+        }).disposed(by: disposeBag)
+        
+        buttonPriority.prioritySubjectObservable.subscribe(onNext: { pririty in
+            self.priorityValue = pririty
+        }).disposed(by: disposeBag)
         
         buildHierarchy()
         buildConstraints()
@@ -167,7 +174,7 @@ class ModalAddTaskViewController: UIViewController {
         }
         
         let dateToday = getDateString()
-        let newTask = TaskModel(id: UUID().uuidString, title: title, description: description, dateString: dateToday, status: self.statusValue, subTasks: [])
+        let newTask = TaskModel(id: UUID().uuidString, title: title, description: description, dateString: dateToday, status: self.statusValue, priority: self.priorityValue, subTasks: [])
         taskSubject.onNext(newTask)
         dismiss(animated: false, completion: nil)
     }
@@ -206,11 +213,5 @@ class ModalAddTaskViewController: UIViewController {
             buttonCancel.widthAnchor.constraint(equalToConstant: 70),
             buttonDone.widthAnchor.constraint(equalToConstant: 70),
         ])
-    }
-}
-
-extension ModalAddTaskViewController: ButtonStatusDelegate {
-    func setStatus(to status: ETaskStatus) {
-        self.statusValue = status
     }
 }

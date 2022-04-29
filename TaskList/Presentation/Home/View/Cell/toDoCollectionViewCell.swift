@@ -26,7 +26,6 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     
     fileprivate let labelPriority: UILabel = {
         let label = UILabel()
-        label.text = "Urgent"
         label.font = .systemFont(ofSize: 12, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,6 +72,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     func settingCell(task: TaskModel) {
         self.labelTitle.text = task.title
         self.labelDate.text = task.dateString
+        self.labelPriority.text = task.priority == .basic ? "Basic" : task.priority == .important ? "Important" : "Urgent"
     }
     
     fileprivate func buildHierarchy() {

@@ -57,6 +57,29 @@ class SeeTaskViewController: UIViewController {
         return button
     }()
     
+    fileprivate lazy var buttonPriority: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor(red: 0.85, green: 0.88, blue: 0.98, alpha: 1.00)
+        
+        button.titleLabel?.font = .systemFont(ofSize: 12, weight: .regular)
+        button.setTitleColor(UIColor(red: 0.32, green: 0.43, blue: 0.90, alpha: 1.00), for: .normal)
+        button.layer.cornerRadius = 15
+        button.clipsToBounds = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        return button
+    }()
+    
+    fileprivate func stackButtons() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(buttonPriority)
+        stack.addArrangedSubview(buttonProcess)
+        return stack
+    }
+    
     fileprivate let labelTitle: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 22, weight: .bold)
@@ -124,13 +147,13 @@ class SeeTaskViewController: UIViewController {
         return stack
     }
     
-    fileprivate func stackProcess() -> UIStackView {
+    fileprivate func stackDate() -> UIStackView {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 0
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(labelDate)
-        stack.addArrangedSubview(buttonProcess)
+        stack.addArrangedSubview(stackButtons())
         return stack
     }
     
@@ -140,7 +163,7 @@ class SeeTaskViewController: UIViewController {
         stack.spacing = 16
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(labelTitle)
-        stack.addArrangedSubview(stackProcess())
+        stack.addArrangedSubview(stackDate())
         return stack
     }
     
@@ -185,8 +208,6 @@ class SeeTaskViewController: UIViewController {
     @IBAction func processButtonTapped() -> Void {
         viewModel.updateStatusTask()
     }
-
-
     
     // MARK: - Setup
     fileprivate func setupVC() {
@@ -197,6 +218,8 @@ class SeeTaskViewController: UIViewController {
             print("Subscribe SeeTask")
             
             self.buttonProcess.setTitle(task.status == .toDo ? "To do" : "In process", for: .normal)
+            
+            self.buttonPriority.setTitle(task.priority == .basic ? "Basic" : task.priority == .important ? "Important" : "Urgent", for: .normal)
             
             self.task = task
             self.subTaskCollectionView.reloadData()
@@ -243,6 +266,9 @@ class SeeTaskViewController: UIViewController {
             
             buttonProcess.heightAnchor.constraint(equalToConstant: 30),
             buttonProcess.widthAnchor.constraint(equalToConstant: 80),
+            
+            buttonPriority.heightAnchor.constraint(equalToConstant: 30),
+            buttonPriority.widthAnchor.constraint(equalToConstant: 80),
             
             buttonAdd.heightAnchor.constraint(equalToConstant: 50),
             buttonAdd.widthAnchor.constraint(equalToConstant: 50),
