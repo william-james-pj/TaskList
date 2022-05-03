@@ -18,9 +18,10 @@ class HomeViewController: UIViewController {
     fileprivate var viewModel: HomeViewModel = {
         return HomeViewModel()
     }()
-    fileprivate var toDoList: [TaskModel] = []
-    fileprivate var progressList: [TaskModel] = []
-    
+    fileprivate var allTasks: [TaskModel] = []
+    fileprivate var filteredTasks: [TaskModel] = []
+    fileprivate var filterSelected: ETaskStatus = .progress
+ 
     // MARK: - Components
     fileprivate let stackBase: UIStackView = {
         let stack = UIStackView()
@@ -39,7 +40,7 @@ class HomeViewController: UIViewController {
     
     fileprivate let labelToday: UILabel = {
         let label = UILabel()
-        label.text = "Today,"
+        label.text = "Welcome Back!"
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = UIColor(named: "Disabled")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,7 @@ class HomeViewController: UIViewController {
     
     fileprivate let labelDate: UILabel = {
         let label = UILabel()
+        label.text = "Here's your tasks"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = UIColor(named: "Text")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -95,11 +97,35 @@ class HomeViewController: UIViewController {
         return stack
     }
     
+    fileprivate let customSegmentedControl: CustomSegmentedControl = {
+        let segmentedControl = CustomSegmentedControl()
+        segmentedControl.setButtonTitles(buttonTitles: ["In progress", "To Do", "Complete"])
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentedControl
+    }()
+    
+    fileprivate let viewStackAuxButtonHeader: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    fileprivate func stackButtonHeader() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.spacing = 8
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(customSegmentedControl)
+        stack.addArrangedSubview(viewStackAuxButtonHeader)
+        return stack
+    }
+
     fileprivate func stackCollection() -> UIStackView {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 0
+        stack.spacing = 32
         stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(stackButtonHeader())
         stack.addArrangedSubview(taskCollectionView)
         return stack
     }
@@ -129,23 +155,24 @@ class HomeViewController: UIViewController {
         viewModel.taskBehavior.subscribe(onNext: { tasks in
             print("Subscribe Home")
             
-            var toDoAux: [TaskModel] = []
-            var progressAux: [TaskModel] = []
-        
-            tasks.forEach { task in
-                if task.status == .progress {
-                    progressAux.append(task)
-                    return
-                }
-                toDoAux.append(task)
-            }
-            
-            self.toDoList = toDoAux
-            self.progressList = progressAux
-            self.taskCollectionView.reloadData()
+            self.allTasks = tasks
+            self.filterTask()
         }).disposed(by: disposeBag)
         
-        self.labelDate.text = getDateToday()
+        customSegmentedControl.indexSelectedSubjectObservable.subscribe(onNext: { indexSelect in
+            switch indexSelect {
+            case 0:
+                self.filterSelected = .progress
+                self.filterTask()
+            case 1:
+                self.filterSelected = .toDo
+                self.filterTask()
+            case 2:
+                self.filterSelected = .complete
+                self.filterTask()
+            default: break
+            } 
+        }).disposed(by: disposeBag)
         
         buildHierarchy()
         buildConstraints()
@@ -157,19 +184,14 @@ class HomeViewController: UIViewController {
         taskCollectionView.dataSource = self
         taskCollectionView.delegate = self
         
-        taskCollectionView.register(SectionToDoCollectionViewCell.self, forCellWithReuseIdentifier: resuseIdentifierSectionToDo)
         taskCollectionView.register(TaskCollectionViewCell.self, forCellWithReuseIdentifier: resuseIdentifierSextionProgress)
     }
     
     // MARK: - Methods
-    fileprivate func getDateToday() -> String {
-        let now = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateFormat = "dd MMMM"
-        return dateFormatter.string(from: now)
+    fileprivate func filterTask() {
+        self.filteredTasks = self.allTasks.filter {$0.status == self.filterSelected}
+        self.taskCollectionView.reloadData()
     }
-    
     
     fileprivate func buildHierarchy() {
         view.addSubview(stackBase)
@@ -210,12 +232,8 @@ class HomeViewController: UIViewController {
 // MARK: - extension CollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            return
-        }
-        
         let seeTask = SeeTaskViewController()
-        seeTask.viewModel.subTaskBehavior.accept(progressList[indexPath.row])
+        seeTask.viewModel.subTaskBehavior.accept(filteredTasks[indexPath.row])
         seeTask.viewModel.subTaskBehavior.skip(1).subscribe(onNext: { task in
             print("Subscribe updateTask")
             self.viewModel.updateTask(task)
@@ -226,43 +244,13 @@ extension HomeViewController: UICollectionViewDelegate {
 
 // MARK: - extension CollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
-    // Section
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
-        
-        return progressList.count
+        return filteredTasks.count
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSectionToDo, for: indexPath) as! SectionToDoCollectionViewCell
-            cell.settingCell(task: toDoList)
-            
-            cell.seeTaskSubjectObservable.subscribe(onNext: { task in
-                print("Subscribe ToDo Click")
-                let seeTask = SeeTaskViewController()
-                
-                seeTask.viewModel.subTaskBehavior.accept(task)
-                
-                seeTask.viewModel.subTaskBehavior.skip(1).subscribe(onNext: { oldTask in
-                    print("Subscribe updateTask ToDo")
-                    self.viewModel.updateTask(oldTask)
-                }).disposed(by: self.disposeBag)
-                
-                self.navigationController?.pushViewController(seeTask, animated: true)
-            }).disposed(by: disposeBag)
-            
-            return cell
-        }
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierSextionProgress, for: indexPath) as! TaskCollectionViewCell
-        cell.settingCell(task: progressList[indexPath.row])
+        cell.settingCell(task: filteredTasks[indexPath.row])
         return cell
     }
 }
@@ -271,12 +259,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
-        
-        if indexPath.section == 0 {
-            return CGSize(width: width, height: 238)
-        }
-        
-        return CGSize(width: width, height: 110)
+        return CGSize(width: width, height: 95)
     }
 }
 

@@ -67,6 +67,8 @@ class SeeTaskViewController: UIViewController {
         button.clipsToBounds = true
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        button.addTarget(self, action: #selector(priorityButtonTapped), for: .touchUpInside)
+        
         return button
     }()
     
@@ -205,8 +207,12 @@ class SeeTaskViewController: UIViewController {
         self.present(modalVC, animated: false, completion: nil)
     }
     
-    @IBAction func processButtonTapped() -> Void {
+    @IBAction func processButtonTapped() {
         viewModel.updateStatusTask()
+    }
+    
+    @IBAction func priorityButtonTapped() {
+        viewModel.updatePriorityTask()
     }
     
     // MARK: - Setup
@@ -217,7 +223,7 @@ class SeeTaskViewController: UIViewController {
         viewModel.subTaskBehavior.subscribe(onNext: { task in
             print("Subscribe SeeTask")
             
-            self.buttonProcess.setTitle(task.status == .toDo ? "To do" : "In process", for: .normal)
+            self.buttonProcess.setTitle(task.status == .toDo ? "To do" : task.status == .progress ? "In process" : "Complete", for: .normal)
             
             self.buttonPriority.setTitle(task.priority == .basic ? "Basic" : task.priority == .important ? "Important" : "Urgent", for: .normal)
             

@@ -44,7 +44,7 @@ class PriorityButton: UIView {
         button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         button.contentVerticalAlignment = .bottom
         button.contentHorizontalAlignment = .leading
-        button.setTitleColor(UIColor(named: "Text"), for: .normal)
+        button.setTitleColor(UIColor(named: "White"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -81,7 +81,7 @@ class PriorityButton: UIView {
     
     // MARK: - Setup
     fileprivate func setupV() {
-        self.backgroundColor = UIColor(red: 0.90, green: 0.95, blue: 0.95, alpha: 1.00)
+        self.backgroundColor = UIColor(named: "Text")
         self.layer.cornerRadius = 16
         self.clipsToBounds = true
         self.translatesAutoresizingMaskIntoConstraints = false

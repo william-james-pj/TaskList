@@ -10,6 +10,7 @@ import Foundation
 enum ETaskStatus: Codable {
     case toDo
     case progress
+    case complete
 }
 
 enum ETaskPriority: Codable {

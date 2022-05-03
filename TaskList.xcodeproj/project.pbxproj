@@ -21,6 +21,7 @@
 		E04A74F527F73CA600CEF9C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74F427F73CA600CEF9C6 /* HomeViewController.swift */; };
 		E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04A74F727F7409C00CEF9C6 /* NavigationController.swift */; };
 		E04DEF87281C1DDD00C3F85F /* PriorityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DEF86281C1DDD00C3F85F /* PriorityButton.swift */; };
+		E04DEF89281C446D00C3F85F /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DEF88281C446D00C3F85F /* CustomSegmentedControl.swift */; };
 		E0AC6D0627FC6D4500AC6764 /* ModalAddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */; };
 		E0B26DF927FC80190071C68A /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DF827FC80190071C68A /* TextFieldCustom.swift */; };
 		E0B26DFC27FC896F0071C68A /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B26DFB27FC896F0071C68A /* TaskModel.swift */; };
@@ -50,6 +51,7 @@
 		E04A74F427F73CA600CEF9C6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E04A74F727F7409C00CEF9C6 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		E04DEF86281C1DDD00C3F85F /* PriorityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityButton.swift; sourceTree = "<group>"; };
+		E04DEF88281C446D00C3F85F /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		E0AC6D0527FC6D4500AC6764 /* ModalAddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalAddTaskViewController.swift; sourceTree = "<group>"; };
 		E0B26DF827FC80190071C68A /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		E0B26DFB27FC896F0071C68A /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				E0B26E0727FCBA060071C68A /* UserDefaults+Extensions.swift */,
 				E01FFE17281055590038A3F3 /* ButtonStatus.swift */,
 				E04DEF86281C1DDD00C3F85F /* PriorityButton.swift */,
+				E04DEF88281C446D00C3F85F /* CustomSegmentedControl.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				E01FFE14281038480038A3F3 /* SectionToDoCollectionViewCell.swift in Sources */,
 				E0B26E0227FCAB7E0071C68A /* SeeTaskViewModel.swift in Sources */,
 				E04A74E227F73B9C00CEF9C6 /* ViewController.swift in Sources */,
+				E04DEF89281C446D00C3F85F /* CustomSegmentedControl.swift in Sources */,
 				E04A74DE27F73B9C00CEF9C6 /* AppDelegate.swift in Sources */,
 				E04A74F827F7409C00CEF9C6 /* NavigationController.swift in Sources */,
 				E0D7BEDA27F75A4600B31AF3 /* TaskCollectionViewCell.swift in Sources */,
