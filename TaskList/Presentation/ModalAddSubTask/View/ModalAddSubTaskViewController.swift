@@ -138,7 +138,7 @@ class ModalAddSubTaskViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped() -> Void {
-        guard let title = textFieldTitle.text else {
+        guard let title = textFieldTitle.text, !title.isEmpty else {
             return
         }
         

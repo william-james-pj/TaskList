@@ -10,6 +10,13 @@ import Foundation
 enum ETaskStatus: Codable {
     case toDo
     case progress
+    case complete
+}
+
+enum ETaskPriority: Codable {
+    case basic
+    case important
+    case urgent
 }
 
 class TaskModel: Codable {
@@ -18,6 +25,7 @@ class TaskModel: Codable {
     var description: String
     var dateString: String
     var status: ETaskStatus
+    var priority: ETaskPriority
     var subTasks: [SubTaskModel]
     
     init(){
@@ -26,15 +34,17 @@ class TaskModel: Codable {
         self.description = ""
         self.dateString = ""
         self.status = .toDo
+        self.priority = .basic
         self.subTasks = []
     }
     
-    init(id: String, title: String, description: String, dateString: String, status: ETaskStatus, subTasks: [SubTaskModel]){
+    init(id: String, title: String, description: String, dateString: String, status: ETaskStatus, priority: ETaskPriority, subTasks: [SubTaskModel]){
         self.id = id
         self.title = title
         self.description = description
         self.dateString = dateString
         self.status = status
+        self.priority = priority
         self.subTasks = subTasks
     }
 }
