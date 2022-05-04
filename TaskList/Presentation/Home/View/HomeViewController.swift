@@ -238,6 +238,9 @@ extension HomeViewController: UICollectionViewDelegate {
             print("Subscribe updateTask")
             self.viewModel.updateTask(task)
         }).disposed(by: disposeBag)
+        seeTask.viewModel.subTaskDeletePublish.subscribe(onNext: { taskId in
+            self.viewModel.deleteTask(taskId)
+        }).disposed(by: disposeBag)
         self.navigationController?.pushViewController(seeTask, animated: true)
     }
 }

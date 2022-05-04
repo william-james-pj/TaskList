@@ -11,6 +11,7 @@ import RxRelay
 
 class SeeTaskViewModel {
     var subTaskBehavior: BehaviorRelay<TaskModel> = BehaviorRelay(value: TaskModel())
+    var subTaskDeletePublish: PublishSubject<String> = PublishSubject()
     
     func newSubTask(_ subTask: SubTaskModel) {
         let taskAux = subTaskBehavior.value
@@ -60,5 +61,10 @@ class SeeTaskViewModel {
             aux.priority = .basic
         }
         subTaskBehavior.accept(aux)
+    }
+    
+    func deleteTask() {
+        let aux = subTaskBehavior.value
+        self.subTaskDeletePublish.onNext(aux.id)
     }
 }

@@ -41,6 +41,22 @@ class HomeViewModel {
         setUserDefault()
     }
     
+    func deleteTask(_ taskId: String) {
+        var aux = self.taskBehavior.value
+        var indexAux = -1
+        print("deleteTask")
+        for (index,item) in aux.enumerated() {
+            if item.id == taskId {
+                indexAux = index
+            }
+        }
+        
+        aux.remove(at: indexAux)
+        self.taskBehavior.accept(aux)
+        
+        setUserDefault()
+    }
+    
     fileprivate func getData() {
         if getUserDefault() {
             return

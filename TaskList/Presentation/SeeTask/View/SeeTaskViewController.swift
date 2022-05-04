@@ -218,7 +218,7 @@ class SeeTaskViewController: UIViewController {
     // MARK: - Setup
     fileprivate func setupVC() {
         view.backgroundColor = UIColor(named: "Backgroud")
-        self.title = "Task Detail"
+//        self.title = "Task Detail"
         
         viewModel.subTaskBehavior.subscribe(onNext: { task in
             print("Subscribe SeeTask")
@@ -289,7 +289,16 @@ class SeeTaskViewController: UIViewController {
     }
     
     fileprivate func setupNavbar() {
-        self.navigationItem.backButtonTitle = ""
+        let buttonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: nil)
+        buttonItem.menu = UIMenu(title: "", children: [deleteAction])
+        self.navigationItem.rightBarButtonItem = buttonItem
+        self.navigationItem.rightBarButtonItem!.tintColor = UIColor(named: "Text")
+        
+    }
+    
+    fileprivate lazy var deleteAction = UIAction(title: "Delete task") { _ in
+        self.navigationController?.popViewController(animated: true)
+        self.viewModel.deleteTask()
     }
 }
 
